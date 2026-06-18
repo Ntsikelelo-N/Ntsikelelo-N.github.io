@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ntsikelelo Jantjie — Junior Data Engineer & Scientist</title>
+  <meta name="description" content="Junior Data Engineer & Data Scientist based in Johannesburg. AWS certified, Python, ETL pipelines, ML on AWS. Currently at Praesignis."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0F1923;
+      --bg2:      #14202E;
+      --card:     #1A2D40;
+      --card2:    #152535;
+      --amber:    #F5A623;
+      --amber-dim:#C4851C;
+      --text:     #EEF0F3;
+      --muted:    #6B8299;
+      --muted2:   #4A6275;
+      --border:   #1E3347;
+      --green:    #4EC994;
+      --syne:     'Syne', sans-serif;
+      --dm:       'DM Sans', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--dm); font-size: 16px; line-height: 1.65; overflow-x: hidden; }
+
+    /* ── OPEN TO WORK BADGE ── */
+    .otw-badge {
+      position: fixed; top: 1.2rem; right: 1.5rem; z-index: 200;
+      display: flex; align-items: center; gap: 0.45rem;
+      background: rgba(78,201,148,0.12);
+      border: 1px solid rgba(78,201,148,0.3);
+      border-radius: 20px;
+      padding: 0.35rem 0.85rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--green);
+      backdrop-filter: blur(8px);
+    }
+    .otw-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse-dot 2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(1.3);} }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center;
+      padding: 0 6vw;
+      height: 60px;
+      background: rgba(15,25,35,0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(30,51,71,0.6);
+    }
+    .nav-logo { font-family: var(--mono); font-size: 0.8rem; color: var(--amber); text-decoration: none; letter-spacing: 0.08em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; margin-left: auto; margin-right: 9rem; }
+    .nav-links a { font-family: var(--dm); font-size: 0.82rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .18s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      padding: 7rem 6vw 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-status {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.72rem;
+      color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      background: rgba(245,166,35,0.08);
+      border: 1px solid rgba(245,166,35,0.2);
+      padding: 0.3rem 0.8rem; border-radius: 4px;
+    }
+    .hero-status span { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); animation: pulse-dot 2s ease-in-out infinite; }
+
+    h1.hero-name {
+      font-family: var(--syne);
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.3rem;
+    }
+    h1.hero-name .first { color: var(--text); }
+    h1.hero-name .last { color: var(--amber); }
+    .hero-title {
+      font-family: var(--dm); font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 300; font-style: italic;
+      color: var(--muted); margin-bottom: 1.8rem;
+      letter-spacing: 0.01em;
+    }
+    .hero-bio {
+      font-size: 0.97rem; color: var(--muted);
+      max-width: 50ch; margin-bottom: 2.2rem;
+      line-height: 1.75;
+    }
+    .hero-bio strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--dm); font-size: 0.88rem; font-weight: 500;
+      padding: 0.7rem 1.5rem; border-radius: 5px;
+      text-decoration: none; transition: all .18s; border: none; cursor: pointer;
+      letter-spacing: 0.01em;
+    }
+    .btn-amber { background: var(--amber); color: #0F1923; }
+    .btn-amber:hover { background: #fbb93a; transform: translateY(-1px); }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+    .btn-outline:hover { border-color: var(--muted); color: var(--text); }
+
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      font-family: var(--mono); font-size: 0.7rem;
+      background: var(--card2); border: 1px solid var(--border);
+      color: var(--muted); padding: 0.25rem 0.65rem; border-radius: 3px;
+    }
+    .chip.cert { border-color: rgba(245,166,35,0.25); color: var(--amber); background: rgba(245,166,35,0.06); }
+
+    /* ── PIPELINE SVG CANVAS ── */
+    .hero-visual { position: relative; z-index: 2; }
+    #pipeline-canvas { width: 100%; max-width: 520px; display: block; }
+
+    /* ── DIAGONAL SEPARATOR ── */
+    .sep {
+      width: 100%; overflow: hidden; line-height: 0;
+      background: var(--bg);
+    }
+    .sep svg { display: block; width: 100%; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5.5rem 6vw; }
+    .section-label {
+      font-family: var(--mono); font-size: 0.72rem;
+      color: var(--amber); letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 0.7rem; display: block;
+    }
+    .section-label::before { content: '// '; }
+    h2.section-heading {
+      font-family: var(--syne); font-size: clamp(1.7rem, 3vw, 2.6rem);
+      font-weight: 800; letter-spacing: -0.025em;
+      margin-bottom: 0.5rem; line-height: 1.15;
+    }
+    .section-sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 3rem; max-width: 60ch; }
+
+    /* ── EXPERIENCE ── */
+    .exp-block { background: var(--bg2); }
+    .exp-entry {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 2rem 2.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .exp-entry::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--amber);
+    }
+    .exp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.3rem; flex-wrap: wrap; }
+    .exp-role { font-family: var(--syne); font-size: 1.1rem; font-weight: 700; color: var(--text); }
+    .exp-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.68rem;
+      background: rgba(78,201,148,0.1); border: 1px solid rgba(78,201,148,0.25);
+      color: var(--green); padding: 0.25rem 0.65rem; border-radius: 20px;
+    }
+    .exp-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: pulse-dot 2s ease-in-out infinite; }
+    .exp-company { font-size: 0.9rem; color: var(--amber); font-weight: 500; margin-bottom: 0.2rem; }
+    .exp-meta { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-bottom: 1.3rem; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .exp-bullets li { font-size: 0.9rem; color: var(--muted); padding-left: 1.3rem; position: relative; line-height: 1.6; }
+    .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--amber); font-size: 0.8rem; }
+    .exp-bullets li strong { color: var(--text); font-weight: 500; }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.3rem;
+    }
+    .proj-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.6rem 1.8rem;
+      display: flex; flex-direction: column;
+      transition: border-color .2s, transform .2s;
+      position: relative; overflow: hidden;
+    }
+    .proj-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: linear-gradient(90deg, var(--amber), transparent);
+      transform: scaleX(0); transform-origin: left; transition: transform .25s;
+    }
+    .proj-card:hover { border-color: rgba(245,166,35,0.35); transform: translateY(-2px); }
+    .proj-card:hover::after { transform: scaleX(1); }
+    .proj-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.7rem; gap: 0.5rem; }
+    .proj-icon { font-size: 1.4rem; }
+    .proj-link { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); text-decoration: none; transition: color .18s; }
+    .proj-link:hover { color: var(--amber); }
+    .proj-name { font-family: var(--syne); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.25; }
+    .proj-desc { font-size: 0.85rem; color: var(--muted); flex: 1; margin-bottom: 1.2rem; line-height: 1.65; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-family: var(--mono); font-size: 0.68rem;
+      padding: 0.18rem 0.5rem; border-radius: 3px;
+    }
+    .tag-tech { background: rgba(245,166,35,0.08); color: var(--amber); border: 1px solid rgba(245,166,35,0.18); }
+    .tag-lang { background: rgba(107,130,153,0.12); color: var(--muted); border: 1px solid rgba(107,130,153,0.2); }
+
+    /* ── SKILLS ── */
+    .skills-block { background: var(--bg2); }
+    .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 7px; padding: 1.4rem 1.6rem;
+    }
+    .skill-card-title {
+      font-family: var(--mono); font-size: 0.7rem;
+      color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .skill-card-title .sk-icon { font-size: 0.95rem; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .sk { font-size: 0.8rem; background: var(--card2); color: var(--text); border: 1px solid var(--border); padding: 0.28rem 0.65rem; border-radius: 4px; }
+
+    /* ── CERTIFICATIONS ── */
+    .certs-row { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .cert-badge {
+      display: flex; align-items: center; gap: 0.7rem;
+      background: var(--card2); border: 1px solid rgba(245,166,35,0.2);
+      border-radius: 7px; padding: 0.9rem 1.2rem;
+      flex: 1; min-width: 200px;
+    }
+    .cert-icon { font-size: 1.3rem; }
+    .cert-name { font-family: var(--dm); font-size: 0.82rem; font-weight: 500; color: var(--text); line-height: 1.3; }
+    .cert-issuer { font-family: var(--mono); font-size: 0.67rem; color: var(--muted); margin-top: 0.15rem; }
+
+    /* ── EDUCATION ── */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .edu-card {
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 7px; padding: 1.5rem 1.7rem;
+    }
+    .edu-year { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .edu-title { font-family: var(--syne); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; line-height: 1.3; }
+    .edu-inst { font-size: 0.82rem; color: var(--amber); font-weight: 500; margin-bottom: 0.7rem; }
+    .edu-note { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+    .edu-note strong { color: var(--text); font-weight: 500; }
+
+    /* ── ACHIEVEMENTS ── */
+    .ach-list { display: flex; flex-direction: column; gap: 0.9rem; max-width: 700px; }
+    .ach-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .ach-bullet { width: 28px; height: 28px; border-radius: 50%; background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.25); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .ach-text { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+    .ach-text strong { color: var(--text); font-weight: 500; }
+
+    /* ── CONTACT ── */
+    .contact-block { background: var(--bg2); }
+    .contact-inner { max-width: 680px; }
+    .contact-tagline { font-size: 1rem; color: var(--muted); margin-bottom: 2.5rem; line-height: 1.75; }
+    .contact-tagline strong { color: var(--text); font-weight: 500; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    .contact-item {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 7px; padding: 1.1rem 1.3rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      text-decoration: none; transition: border-color .18s, transform .18s;
+    }
+    .contact-item:hover { border-color: var(--amber); transform: translateY(-1px); }
+    .contact-item-icon { font-size: 1.1rem; }
+    .contact-item-label { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-item-value { font-size: 0.85rem; color: var(--text); font-weight: 500; margin-top: 0.1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem 6vw;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: var(--mono); font-size: 0.72rem; color: var(--muted2);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 820px) {
+      .hero { grid-template-columns: 1fr; padding-top: 6rem; }
+      .hero-visual { display: none; }
+      .skills-layout, .edu-grid, .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .otw-badge { display: none; }
+    }
+    @media (max-width: 560px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- OPEN TO WORK BADGE -->
+  <div class="otw-badge"><span class="otw-dot"></span>Open to Work</div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">NNJ</a>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-status"><span></span>Data Science Practitioner · Praesignis · Jhb</div>
+      <h1 class="hero-name">
+        <span class="first">Ntsikelelo</span><br>
+        <span class="last">Jantjie</span>
+      </h1>
+      <p class="hero-title">Junior Data Engineer &amp; Data Scientist</p>
+      <p class="hero-bio">
+        I build <strong>automated data pipelines</strong>, <strong>ETL/ELT workflows</strong>, and <strong>machine learning systems</strong> on AWS — turning raw, messy data into decisions that matter. Quantitative foundation in Physics &amp; Applied Maths from Wits. 5 AWS &amp; DataCamp certifications.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-amber">Get in Touch</a>
+        <a href="https://github.com/Ntsikelelo-N" target="_blank" rel="noopener" class="btn btn-outline">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/ntsikelelo-jantjie/" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn ↗</a>
+      </div>
+      <div class="hero-chips">
+        <span class="chip cert">AWS Certified</span>
+        <span class="chip cert">AWS re/Start</span>
+        <span class="chip">Python</span>
+        <span class="chip">SQL</span>
+        <span class="chip">ETL/ELT</span>
+        <span class="chip">SageMaker</span>
+        <span class="chip">dbt</span>
+        <span class="chip">Johannesburg, SA</span>
+      </div>
+    </div>
+
+    <!-- ANIMATED PIPELINE VISUAL -->
+    <div class="hero-visual">
+      <svg id="pipeline-canvas" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Background grid -->
+        <g opacity="0.06" stroke="#6B8299" stroke-width="0.5">
+          <line x1="0" y1="50" x2="500" y2="50"/><line x1="0" y1="100" x2="500" y2="100"/>
+          <line x1="0" y1="150" x2="500" y2="150"/><line x1="0" y1="200" x2="500" y2="200"/>
+          <line x1="0" y1="250" x2="500" y2="250"/><line x1="0" y1="300" x2="500" y2="300"/>
+          <line x1="0" y1="350" x2="500" y2="350"/>
+          <line x1="50" y1="0" x2="50" y2="400"/><line x1="100" y1="0" x2="100" y2="400"/>
+          <line x1="150" y1="0" x2="150" y2="400"/><line x1="200" y1="0" x2="200" y2="400"/>
+          <line x1="250" y1="0" x2="250" y2="400"/><line x1="300" y1="0" x2="300" y2="400"/>
+          <line x1="350" y1="0" x2="350" y2="400"/><line x1="400" y1="0" x2="400" y2="400"/>
+          <line x1="450" y1="0" x2="450" y2="400"/>
+        </g>
+
+        <!-- Pipeline Nodes -->
+        <!-- Row 1: Sources -->
+        <g id="node-s3" class="pipe-node" transform="translate(60,80)">
+          <rect x="-38" y="-22" width="76" height="44" rx="6" fill="#1A2D40" stroke="#F5A623" stroke-width="1.2" opacity="0.9"/>
+          <text x="0" y="-5" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#F5A623">S3</text>
+          <text x="0" y="8" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6B8299">Raw Data</text>
+        </g>
+        <g id="node-db" class="pipe-node" transform="translate(60,180)">
+          <rect x="-38" y="-22" width="76" height="44" rx="6" fill="#1A2D40" stroke="#F5A623" stroke-width="1.2" opacity="0.9"/>
+          <text x="0" y="-5" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#F5A623">SQL</text>
+          <text x="0" y="8" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6B8299">Database</text>
+        </g>
+        <g id="node-csv" class="pipe-node" transform="translate(60,280)">
+          <rect x="-38" y="-22" width="76" height="44" rx="6" fill="#1A2D40" stroke="#F5A623" stroke-width="1.2" opacity="0.9"/>
+          <text x="0" y="-5" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#F5A623">CSV</text>
+          <text x="0" y="8" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6B8299">Files</text>
+        </g>
+
+        <!-- Arrows to ETL -->
+        <line x1="98" y1="80" x2="178" y2="130" stroke="#2A3A4A" stroke-width="1.5" stroke-dasharray="4 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1.2s" repeatCount="indefinite"/>
+        </line>
+        <line x1="98" y1="180" x2="178" y2="175" stroke="#2A3A4A" stroke-width="1.5" stroke-dasharray="4 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1.4s" repeatCount="indefinite"/>
+        </line>
+        <line x1="98" y1="280" x2="178" y2="220" stroke="#2A3A4A" stroke-width="1.5" stroke-dasharray="4 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1.6s" repeatCount="indefinite"/>
+        </line>
+
+        <!-- ETL node -->
+        <g id="node-etl" transform="translate(220,180)">
+          <rect x="-46" y="-28" width="92" height="56" rx="8" fill="#1E3347" stroke="#F5A623" stroke-width="2" filter="url(#glow)"/>
+          <text x="0" y="-7" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#F5A623" font-weight="500">ETL/ELT</text>
+          <text x="0" y="8" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#EEF0F3">Transform</text>
+          <text x="0" y="19" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6B8299">Validate · Clean</text>
+          <animate attributeName="opacity" values="1;0.7;1" dur="2.5s" repeatCount="indefinite"/>
+        </g>
+
+        <!-- Arrow to ML -->
+        <line x1="266" y1="180" x2="333" y2="130" stroke="#F5A623" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5">
+          <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1s" repeatCount="indefinite"/>
+        </line>
+        <line x1="266" y1="180" x2="333" y2="280" stroke="#F5A623" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5">
+          <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1s" repeatCount="indefinite"/>
+        </line>
+
+        <!-- ML node -->
+        <g id="node-ml" transform="translate(375,110)">
+          <rect x="-42" y="-24" width="84" height="48" rx="6" fill="#1A2D40" stroke="#4EC994" stroke-width="1.5"/>
+          <text x="0" y="-6" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#4EC994">ML Model</text>
+          <text x="0" y="7" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6B8299">SageMaker</text>
+          <text x="0" y="18" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6B8299">RF · DT · NLP</text>
+        </g>
+
+        <!-- Dashboard node -->
+        <g id="node-dash" transform="translate(375,290)">
+          <rect x="-42" y="-24" width="84" height="48" rx="6" fill="#1A2D40" stroke="#4EC994" stroke-width="1.5"/>
+          <text x="0" y="-6" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#4EC994">Dashboard</text>
+          <text x="0" y="7" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6B8299">KPI Reports</text>
+          <text x="0" y="18" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#6B8299">Stakeholders</text>
+        </g>
+
+        <!-- Travelling particles -->
+        <circle r="4" fill="#F5A623" opacity="0.9" filter="url(#glow)">
+          <animateMotion dur="3s" repeatCount="indefinite" path="M60,80 C130,80 150,150 220,180 C280,210 330,240 375,290"/>
+        </circle>
+        <circle r="3" fill="#4EC994" opacity="0.8" filter="url(#glow)">
+          <animateMotion dur="4s" repeatCount="indefinite" begin="1.5s" path="M60,180 C140,180 180,180 220,180 C270,180 310,150 375,110"/>
+        </circle>
+        <circle r="3" fill="#F5A623" opacity="0.7">
+          <animateMotion dur="3.5s" repeatCount="indefinite" begin="0.8s" path="M60,280 C130,280 160,220 220,180 C270,155 310,130 375,110"/>
+        </circle>
+
+        <!-- Label -->
+        <text x="250" y="385" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#2A3A4A" letter-spacing="2">END-TO-END DATA PIPELINE</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="exp-block">
+    <span class="section-label">Experience</span>
+    <h2 class="section-heading reveal">Where I've delivered.</h2>
+    <p class="section-sub reveal">Production work, not just coursework.</p>
+
+    <div class="exp-entry reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Data Science Practitioner</div>
+          <div class="exp-company">Praesignis</div>
+          <div class="exp-meta">06/2025 – Present &nbsp;·&nbsp; Randburg, South Africa</div>
+        </div>
+        <div class="exp-badge"><span class="dot"></span>Current Role</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Build and maintain <strong>automated data pipelines</strong> on AWS (EC2, S3, SageMaker) — covering ingestion, preprocessing, feature engineering, model training and evaluation in a production-style risk analytics environment.</li>
+        <li>Develop and optimise <strong>ETL/ELT processes</strong> for structured datasets, handling transformation, integration, and quality assurance for downstream analytics.</li>
+        <li>Customer retention analytics focus — working with <strong>large imbalanced datasets</strong> to deliver measurable business value using precision, recall, and ROC-AUC metrics.</li>
+        <li>Implement <strong>CI/CD fundamentals</strong> with Git for reproducible, version-controlled workflows; apply MLOps best practices including experiment tracking and clean documentation.</li>
+        <li>Collaborate in a <strong>cross-functional team</strong> through code reviews and technical discussions, continuously improving pipeline performance and data quality.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <span class="section-label">Projects</span>
+    <h2 class="section-heading reveal">What I've built.</h2>
+    <p class="section-sub reveal">End-to-end pipelines, ML systems, and analytical platforms.</p>
+
+    <div class="projects-grid">
+
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <span class="proj-icon">🏦</span>
+          <a class="proj-link" href="https://github.com/Ntsikelelo-N/finadmin360" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+        <div class="proj-name">finadmin360 — Finance Data Platform</div>
+        <div class="proj-desc">Transforms a South African finance administrator's manual spreadsheet workflow into a fully automated, insight-driven data platform. Includes Airflow DAGs, dbt models, Terraform-provisioned infra, and dashboards.</div>
+        <div class="proj-tags">
+          <span class="tag tag-tech">dbt</span><span class="tag tag-tech">Airflow</span><span class="tag tag-tech">Terraform</span><span class="tag tag-tech">Docker</span><span class="tag tag-lang">Python · HCL</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <span class="proj-icon">☁️</span>
+          <a class="proj-link" href="https://github.com/Ntsikelelo-N/End-to-End-Churn-Prediction-Pipeline-on-AWS" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+        <div class="proj-name">Customer Churn ETL Pipeline — AWS</div>
+        <div class="proj-desc">Full ETL pipeline (SQL → Python → AWS S3/SageMaker) covering multi-source data ingestion, transformation, data quality validation, and KPI calculation (precision, recall, ROC-AUC) for a customer retention reporting use case.</div>
+        <div class="proj-tags">
+          <span class="tag tag-tech">AWS S3</span><span class="tag tag-tech">SageMaker</span><span class="tag tag-tech">ETL</span><span class="tag tag-tech">Classification</span><span class="tag tag-lang">Python · SQL</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <span class="proj-icon">✈️</span>
+          <a class="proj-link" href="https://github.com/Ntsikelelo-N/predicting-flight-bookings" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+        <div class="proj-name">Flight Booking Predictor — ML</div>
+        <div class="proj-desc">Binary classification model predicting whether customers will complete a flight booking. End-to-end feature engineering, model evaluation, and data quality reporting on a large multi-variable dataset.</div>
+        <div class="proj-tags">
+          <span class="tag tag-tech">Scikit-learn</span><span class="tag tag-tech">Random Forests</span><span class="tag tag-tech">EDA</span><span class="tag tag-lang">Python · Pandas</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <span class="proj-icon">💬</span>
+          <a class="proj-link" href="https://github.com/Ntsikelelo-N/Flight-reviews-analysis" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+        <div class="proj-name">Sentiment Analysis NLP Pipeline</div>
+        <div class="proj-desc">Automated data pipeline for text preprocessing, TF-IDF feature extraction, and sentiment classification on customer review data — producing executive-ready insight summaries and trend narratives from unstructured multi-source data.</div>
+        <div class="proj-tags">
+          <span class="tag tag-tech">NLP</span><span class="tag tag-tech">TF-IDF</span><span class="tag tag-tech">Sentiment</span><span class="tag tag-lang">Python · NumPy</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <span class="proj-icon">📊</span>
+          <a class="proj-link" href="https://github.com/Ntsikelelo-N/Multivariate-linear-regression" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+        <div class="proj-name">Salary Analysis — Statistical Reporting</div>
+        <div class="proj-desc">Data model and reporting workflow using SQL, Python, and Excel; calculates performance metrics (RMSE, MAE, R²) and produces stakeholder-ready dashboards with data narratives and recommendations.</div>
+        <div class="proj-tags">
+          <span class="tag tag-tech">Regression</span><span class="tag tag-tech">SQL</span><span class="tag tag-tech">KPI Dashboards</span><span class="tag tag-lang">Python · Excel</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="skills-block">
+    <span class="section-label">Skills & Tools</span>
+    <h2 class="section-heading reveal">The full stack.</h2>
+    <p class="section-sub reveal">From raw data ingestion to deployed model — I own the whole pipeline.</p>
+
+    <div class="skills-layout">
+      <div class="skill-card reveal">
+        <div class="skill-card-title"><span class="sk-icon">🐍</span>Languages</div>
+        <div class="skill-list">
+          <span class="sk">Python</span><span class="sk">Pandas</span><span class="sk">NumPy</span><span class="sk">Scikit-learn</span><span class="sk">Matplotlib</span><span class="sk">Seaborn</span><span class="sk">SQL</span><span class="sk">Bash</span><span class="sk">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title"><span class="sk-icon">⚙️</span>Data Engineering</div>
+        <div class="skill-list">
+          <span class="sk">ETL/ELT Pipelines</span><span class="sk">dbt</span><span class="sk">Airflow</span><span class="sk">Data Wrangling</span><span class="sk">Feature Engineering</span><span class="sk">Data Quality & Governance</span><span class="sk">Automated Workflows</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title"><span class="sk-icon">🤖</span>Machine Learning</div>
+        <div class="skill-list">
+          <span class="sk">Regression</span><span class="sk">Classification</span><span class="sk">Decision Trees</span><span class="sk">Random Forests</span><span class="sk">NLP / TF-IDF</span><span class="sk">Sentiment Analysis</span><span class="sk">RMSE · MAE · R²</span><span class="sk">ROC-AUC</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title"><span class="sk-icon">☁️</span>Cloud & MLOps</div>
+        <div class="skill-list">
+          <span class="sk">AWS EC2</span><span class="sk">AWS S3</span><span class="sk">SageMaker</span><span class="sk">Terraform</span><span class="sk">Docker</span><span class="sk">CI/CD</span><span class="sk">Git & GitHub</span><span class="sk">Reproducible Workflows</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <span class="section-label">Certifications</span>
+    <h2 class="section-heading reveal">Verified credentials.</h2>
+    <div class="certs-row">
+      <div class="cert-badge reveal"><span class="cert-icon">☁️</span><div><div class="cert-name">AWS Cloud Practitioner</div><div class="cert-issuer">Amazon Web Services</div></div></div>
+      <div class="cert-badge reveal"><span class="cert-icon">🚀</span><div><div class="cert-name">AWS re/Start Graduate</div><div class="cert-issuer">Amazon Web Services</div></div></div>
+      <div class="cert-badge reveal"><span class="cert-icon">📊</span><div><div class="cert-name">Associate Data Analyst</div><div class="cert-issuer">DataCamp</div></div></div>
+      <div class="cert-badge reveal"><span class="cert-icon">🧠</span><div><div class="cert-name">Associate Data Scientist</div><div class="cert-issuer">DataCamp</div></div></div>
+      <div class="cert-badge reveal"><span class="cert-icon">🐍</span><div><div class="cert-name">Python Data Associate</div><div class="cert-issuer">DataCamp</div></div></div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" style="background:var(--bg2);">
+    <span class="section-label">Education</span>
+    <h2 class="section-heading reveal">Academic foundation.</h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-year">03/2024 – 03/2025</div>
+        <div class="edu-title">National Certificate in IT — Systems Development (Data Science)</div>
+        <div class="edu-inst">Umuzi Academy &nbsp;·&nbsp; SAQA ID 48872</div>
+        <div class="edu-note">Comprehensive training in statistical analysis, SQL, ETL processes, data wrangling, reporting, and data visualisation using Python and Excel.</div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">02/2019 – 11/2023</div>
+        <div class="edu-title">BSc Physics &amp; Computational Mathematics <span style="font-size:0.8rem;color:var(--muted);font-weight:400;">(3rd Year, Incomplete)</span></div>
+        <div class="edu-inst">University of the Witwatersrand &nbsp;·&nbsp; Braamfontein</div>
+        <div class="edu-note">Strong quantitative foundation in statistical modelling, numerical techniques, calculus, and linear algebra — directly applicable to ML. <strong>First Class Achievement (2019).</strong> <strong>Golden Key International Honour Society</strong> member since 2020.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <span class="section-label">Achievements</span>
+    <h2 class="section-heading reveal">Recognition.</h2>
+    <div class="ach-list">
+      <div class="ach-item reveal">
+        <div class="ach-bullet">🏆</div>
+        <div class="ach-text"><strong>Google Hardware Hackathon (Oct 2025)</strong> — Built a server and troubleshot errors. National hackathon participant.</div>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-bullet">🏅</div>
+        <div class="ach-text"><strong>Golden Key International Honour Society</strong> — Member since 2020. Recognised for academic excellence at Wits.</div>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-bullet">📐</div>
+        <div class="ach-text"><strong>University of the Witwatersrand Mathematics Competition (2022)</strong> — Participant.</div>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-bullet">⭐</div>
+        <div class="ach-text"><strong>Free State Province NSC Top 100 Candidate (2018)</strong> — Recognised for outstanding matriculation performance.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-block">
+    <span class="section-label">Contact</span>
+    <h2 class="section-heading reveal">Let's build something.</h2>
+    <div class="contact-inner">
+      <p class="contact-tagline reveal">
+        I'm actively looking for <strong>Data Engineer</strong>, <strong>Data Scientist</strong>, or <strong>Analytics Engineer</strong> roles — especially ones with real-world data problems, cloud infrastructure, and room to grow. Based in Johannesburg, open to remote and hybrid.
+      </p>
+      <div class="contact-grid">
+        <a class="contact-item reveal" href="mailto:ntsikelelonamba@gmail.com">
+          <span class="contact-item-icon">✉️</span>
+          <div><div class="contact-item-label">Email</div><div class="contact-item-value">ntsikelelonamba@gmail.com</div></div>
+        </a>
+        <a class="contact-item reveal" href="https://www.linkedin.com/in/ntsikelelo-jantjie/" target="_blank" rel="noopener">
+          <span class="contact-item-icon">💼</span>
+          <div><div class="contact-item-label">LinkedIn</div><div class="contact-item-value">in/ntsikelelo-jantjie</div></div>
+        </a>
+        <a class="contact-item reveal" href="https://github.com/Ntsikelelo-N" target="_blank" rel="noopener">
+          <span class="contact-item-icon">🐙</span>
+          <div><div class="contact-item-label">GitHub</div><div class="contact-item-value">Ntsikelelo-N</div></div>
+        </a>
+        <a class="contact-item reveal" href="tel:+27824585705">
+          <span class="contact-item-icon">📞</span>
+          <div><div class="contact-item-label">Phone</div><div class="contact-item-value">+27 82 458 5705</div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Ntsikelelo Nicholas Jantjie</span>
+    <span>Johannesburg, South Africa</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          // Stagger siblings
+          const siblings = [...e.target.parentElement.querySelectorAll('.reveal:not(.in)')];
+          const idx = siblings.indexOf(e.target);
+          setTimeout(() => {
+            e.target.classList.add('in');
+          }, idx * 80);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>
